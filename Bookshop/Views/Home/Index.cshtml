@@ -1,0 +1,13 @@
+﻿@model HomeViewModel
+
+
+
+<h2>Prefered books of the week</h2>
+
+
+<div class="row">
+    @foreach (var book in Model.IsBestseller)
+    {
+        @await Html.PartialAsync("BookSummary",book)
+    }
+</div>

@@ -1,0 +1,53 @@
+﻿
+    @model ShoppingCartViewModel
+
+    <div class="row checkoutForm">
+        <h2>Your shopping cart</h2>
+        <h4>Here are the books in your shopping cart.</h4>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Selected amount</th>
+                    <th>Book</th>
+                    <th class="text-right">Author</th>
+                    <th class="text-right">Pages</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+                {
+                    <tr>
+                        <td class="text-center">@line.Amount</td>
+                        <td class="text-left">@line.Book.Name</td>
+                        <td class="text-right">@line.Book.Author</td>
+                        <td class="text-right">@line.Book.Pages </td>
+                        <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-bookId="@line.Book.BookId"></a></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Total:</td>
+                    <td class="text-right">
+                        @Model.ShoppingCartTotal
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="text-right">
+            <div class="btn-group ">
+                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out</a>
+                <a class="btn-group">
+                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        Add more books<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a asp-controller="Book" asp-action="List" asp-route-category="Science-Fiction">Science-Fiction</a></li>
+                        <li><a asp-controller="Book" asp-action="List" asp-route-category="Comics">Comics</a></li>
+                    </ul>
+                </a>
+            </div>
+        </div>
+    </div>

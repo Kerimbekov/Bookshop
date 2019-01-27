@@ -1,0 +1,12 @@
+﻿<div>
+    <h2>All books are shown here</h2>
+</div>
+
+<h2>@Model.CurrentCategory</h2>
+
+@{
+    foreach (Book book in Model.Books)
+    {
+        @await Html.PartialAsync("BookSummary", book);
+    }
+}
